@@ -19,15 +19,22 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://livechat-4.onrender.com",
-    ],
-    credentials: true,
-  })
-);
+const allowedOrigins = [
+  "https://livechat-5.onrender.com",
+  "https://livechat-4.onrender.com",
+  "http://localhost:5173", // for local dev
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
 
 
 app.use("/api/auth", authRoutes);
