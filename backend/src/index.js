@@ -61,9 +61,10 @@ app.use("/api/messages", messageRoutes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/vite-project/dist")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/vite-project/dist", "index.html"));
-  });
+  app.all('/*splat', (req, res) => {
+  res.status(404).send(`The URL ${req.originalUrl} doesn't exist`);
+});
+
 }
 
 
