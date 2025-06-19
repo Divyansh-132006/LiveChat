@@ -23,7 +23,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://livechat-3-2mxg.onrender.com"
+      "https://livechat-4.onrender.com",
     ],
     credentials: true,
   })
