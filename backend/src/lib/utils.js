@@ -44,12 +44,20 @@ export const generateTokenWithFallback = (userId, res) => {
   const isProduction = process.env.NODE_ENV === "production";
   
   // Set cookie
+export const generateToken = (userId, res) => {
+  const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? "None" : "Lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
+    secure: true,             // ✅ Required for HTTPS (production)
+    sameSite: "None",         // ✅ Required for cross-site cookies (e.g., Netlify + Render)
+    maxAge: 7 * 24 * 60 * 60 * 1000, // ✅ 7 days
   });
+
+  return token; // optional, for fallback
+};
 
   // Also return token in response for mobile fallback
   return {
