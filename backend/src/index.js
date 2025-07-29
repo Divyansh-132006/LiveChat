@@ -20,8 +20,7 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
-  "https://livechat-5.onrender.com",
-  "https://livechat-4.onrender.com",
+  "https://effortless-mousse-421c55.netlify.app/",
   "http://localhost:5173", // for local dev
 ];
 
