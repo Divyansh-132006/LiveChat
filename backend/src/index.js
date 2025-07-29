@@ -17,13 +17,6 @@ import { app, server } from "./lib/socket.js";
 const PORT = process.env.PORT;
 const __dirname = path.resolve();
 
-app.use(express.json());
-app.use(cookieParser());
-const allowedOrigins = [
-  "https://gleeful-lolly-1c6012.netlify.app",
-  "http://localhost:5173", // for local dev
-];
-
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -34,6 +27,15 @@ app.use(cors({
   },
   credentials: true,
 }));
+
+app.use(express.json());
+app.use(cookieParser());
+const allowedOrigins = [
+  "https://gleeful-lolly-1c6012.netlify.app",
+  "http://localhost:5173", // for local dev
+];
+
+
 
 
 app.use("/api/auth", authRoutes);
