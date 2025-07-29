@@ -5,15 +5,19 @@ import express from "express";
 const app = express();
 const server = http.createServer(app);
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://gleeful-lolly-1c6012.netlify.app"
+  // Add "https://livechat-5.onrender.com" only if it hosts frontend
+];
+
 const io = new Server(server, {
   cors: {
-    origin: [
-      "http://localhost:5173",
-      "https://livechat-5.onrender.com"
-    ],
+    origin: allowedOrigins,
     credentials: true,
   },
 });
+
 
 const userSocketMap = {}; // {userId: socketId}
 
