@@ -23,21 +23,16 @@ export const generateToken = (userId, res) => {
     expiresIn: "7d",
   });
 
-  // Check if we're in production
   const isProduction = process.env.NODE_ENV === "production";
-  
+
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: isProduction, // Only secure in production
-    sameSite: isProduction ? "None" : "Lax", // Use Lax for development, None for production
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    // Add domain for production if needed
-    ...(isProduction && { 
-      domain: process.env.COOKIE_DOMAIN || undefined 
-    })
+    secure: isProduction,             // ✅ Only use secure cookies in production (Render)
+    sameSite: isProduction ? "None" : "Lax",  // ✅ Required for cross-origin auth
+    maxAge: 7 * 24 * 60 * 60 * 1000,  // ✅ 7 days in milliseconds
   });
 
-  return token;
+  return token; // optional, if you want to use it in the response too
 };
 
 // Alternative approach - also send token in response body for mobile fallback
