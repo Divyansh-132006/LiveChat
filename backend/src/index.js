@@ -20,7 +20,7 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
-  "https://effortless-mousse-421c55.netlify.app/",
+  "https://effortless-mousse-421c55.netlify.app",
   "http://localhost:5173", // for local dev
 ];
 
