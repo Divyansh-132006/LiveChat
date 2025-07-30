@@ -50,9 +50,9 @@ if (process.env.NODE_ENV === "production") {
 
 }
 
-app.get('/ping', (req,res) =>{
-  res.send("pong")
-})
+ app.get("/ping", (req, res) => {
+  res.status(200).send("pong");
+});
 server.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
   connectDB();
