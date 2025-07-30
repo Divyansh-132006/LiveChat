@@ -67,3 +67,19 @@ LiveChat
 │   ├── vite-project
 │   ├── public, components, pages
 
+🙌 Contributing
+Fork the repo
+
+Create your feature branch (git checkout -b feature/AmazingFeature)
+
+Commit your changes
+
+Push to the branch (git push origin feature/AmazingFeature)
+
+Open a Pull Request
+
+📄 License
+MIT License © 2025 [Divyansh]
+
+
+
