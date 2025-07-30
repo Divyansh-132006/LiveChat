@@ -64,23 +64,23 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    generateToken(user._id, res);
-
+    // ✅ Only use fallback version to cover both cookie + token return
     const { token } = generateTokenWithFallback(user._id, res);
 
-res.status(200).json({
-  _id: user._id,
-  fullName: user.fullName,
-  email: user.email,
-  profilePic: user.profilePic,
-  token, // ✅ send token back for fallback (incognito/mobile)
-});
+    res.status(200).json({
+      _id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+      profilePic: user.profilePic,
+      token, // ✅ Include token for mobile/incognito use
+    });
 
   } catch (error) {
     console.log("Error in login controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 
 export const logout = (req, res) => {
   try {
